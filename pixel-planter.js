@@ -30,6 +30,8 @@ function testTrunk(ctx) {
     var branches = getRandomInt(maxBranches - minBranches);
 
     for (var j = 0; j < branches; j++) {
+        ctx.strokeStyle = "#5a3d17";
+
         //left = 1, right = 2
         var side = getRandomInt(2);
         //up = 1, down = 2
@@ -49,46 +51,38 @@ function testTrunk(ctx) {
             endx = 74 + getRandomInt(30);
         }
         if (angle === 1) {
-            starty = getRandomInt((2*height) / 3) + (height / 3);
+            starty = getRandomInt((2 * height) / 3) + (height / 3);
             endy = getRandomInt(height / 10) + starty;
         } else {
             starty = getRandomInt(height / 2) + (height / 2);
             endy = starty - getRandomInt(height / 5);
         }
         ctx.beginPath();
-        ctx.moveTo(startx, 128-(starty));
-        ctx.lineTo(endx, 128-(endy));
+        ctx.moveTo(startx, 128 - (starty));
+        ctx.lineTo(endx, 128 - (endy));
         ctx.stroke();
+
+        //
+        addVine(22, ctx, endx, endy);
     }
 
-  //  ctx.beginPath();
-   // ctx.moveTo(100, 77);
-  //  ctx.lineTo(80, 98);
- //   ctx.strokeStyle = "#234705";
- //   ctx.stroke()
+    //  ctx.beginPath();
+    // ctx.moveTo(100, 77);
+    //  ctx.lineTo(80, 98);
+    //   ctx.strokeStyle = "#234705";
+    //   ctx.stroke()
 
+}
 
-    /*ctx.moveTo(90,100);
-    ctx.lineTo(110,100);
-    ctx.moveTo(90,99);
-    ctx.lineTo(110,99);
-    ctx.moveTo(90,98);
-    ctx.lineTo(110,98);c
-    ctx.moveTo(90,97);
-    ctx.lineTo(110,97);
-    ctx.moveTo(90,96);
-    ctx.lineTo(110,96);
-    ctx.moveTo(90,95);
-    ctx.lineTo(110,95);
-    ctx.moveTo(91,94);
-    ctx.lineTo(111,94);
-    ctx.moveTo(92,93);
-    ctx.lineTo(112,93);
-    ctx.moveTo(93,92);
-    ctx.lineTo(113,92);
-    ctx.moveTo(92,91);
-    ctx.lineTo(112,91);
-    ctx.stroke();*/
+function addVine(vineLength, ctx, startX, startY) {
+
+    for (var i = 0; i < vineLength; i++) {
+        ctx.beginPath();
+        ctx.moveTo(startX + ((-1 * (i % 2)) * (Math.sin(i) / 5)), 128 - startY + i);
+        ctx.lineTo(startX + ((-1 * (i % 2)) * (Math.sin(i + 1) / 5)), 128 - startY + (i + 1));
+        ctx.strokeStyle = "#234705";
+        ctx.stroke()
+    }
 }
 
 function getRandomInt(max) {
